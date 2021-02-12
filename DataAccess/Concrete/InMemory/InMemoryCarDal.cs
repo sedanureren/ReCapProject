@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -10,16 +11,16 @@ namespace DataAccess.Concrete.InMemory
         public class InMemoryCarDal : ICarDal
  {
         List<Car> _cars;
-        private int brandId;
+        public int brandId;
 
         public InMemoryCarDal()
         {
             _cars = new List<Car> {
-               new Car{BrandId=1,CarId=1,ColorId=13,DailyPrice=1500,ModelYear=2010,Description="Toyota" },
-               new Car{BrandId=1,CarId=2,ColorId=14,DailyPrice=2000,ModelYear=2016,Description="Fiat" },
-               new Car{BrandId=2,CarId=3,ColorId=15,DailyPrice=4000,ModelYear=2020,Description="Mercedes" },
-               new Car{BrandId=4,CarId=4,ColorId=16,DailyPrice=9000,ModelYear=2018,Description="Audi" },
-               new Car{BrandId=5,CarId=5,ColorId=17,DailyPrice=1000,ModelYear=2012,Description="Nissan" },
+               new Car{BrandId=1,CarId=1,ColorId=13,DailyPrice=150,ModelYear=2010,Description="Manuel" },
+               new Car{BrandId=1,CarId=2,ColorId=14,DailyPrice=200,ModelYear=2016,Description="Otomatik" },
+               new Car{BrandId=2,CarId=3,ColorId=15,DailyPrice=400,ModelYear=2020,Description="Otomatik" },
+               new Car{BrandId=4,CarId=4,ColorId=16,DailyPrice=900,ModelYear=2018,Description="Otomatik" },
+               new Car{BrandId=5,CarId=5,ColorId=17,DailyPrice=100,ModelYear=2012,Description="Manuel" },
 
 
             };
@@ -37,9 +38,19 @@ namespace DataAccess.Concrete.InMemory
             
         }
 
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAll()
         {
             return _cars;
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Car> GetAllByCar(int CarId)
