@@ -10,8 +10,8 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
-            ManagerTest();
+            CarTest();
+            //ManagerTest();
 
         }
 
@@ -19,7 +19,7 @@ namespace ConsoleUI
         {
             Console.WriteLine("Renkler");
             ColorManager colorManager1 = new ColorManager(new EfColorDal());
-            foreach (var car in colorManager1.GetAll())
+            foreach (var car in colorManager1.GetAll().Data)
             {
                 Console.WriteLine(car.ColorName);
             }
@@ -40,7 +40,7 @@ namespace ConsoleUI
 
             Console.WriteLine("Yeni renk ekleme sonucu");
             ColorManager colorManager2 = new ColorManager(new EfColorDal());
-            foreach (var car in colorManager2.GetAll())
+            foreach (var car in colorManager2.GetAll().Data)
             {
                 Console.WriteLine(car.ColorName);
             }
@@ -49,16 +49,9 @@ namespace ConsoleUI
 
                                                                   );
 
-            Console.WriteLine("Markalar");
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var car in brandManager.GetAll())
-            {
-                Console.WriteLine(car.BrandName);
-            }
-            Console.WriteLine("---------------------------------"
+            
 
-
-                                                                  );
+                                                                  
 
 
             Console.WriteLine("Markaları Güncelle");
@@ -73,10 +66,21 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetail())
+            var result = carManager.GetCarDetails();
+
+            if (result.Success == true)
             {
-                Console.WriteLine(car.CarName+"/"+car.BrandName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.BrandName + "/" + car.CarName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
         }
     }
  }
